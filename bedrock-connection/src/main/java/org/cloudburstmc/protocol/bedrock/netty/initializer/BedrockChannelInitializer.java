@@ -69,14 +69,12 @@ public abstract class BedrockChannelInitializer<T extends BedrockSession> extend
     }
 
     private static CompressionStrategy getCompression(CompressionAlgorithm algorithm) {
-        if (algorithm == PacketCompressionAlgorithm.ZLIB) {
-            return ZLIB_RAW_STRATEGY;
-        } else if (algorithm == PacketCompressionAlgorithm.SNAPPY) {
+        if (algorithm == PacketCompressionAlgorithm.SNAPPY) {
             return SNAPPY_STRATEGY;
         } else if (algorithm == PacketCompressionAlgorithm.NONE) {
             return NOOP_STRATEGY;
         } else {
-            throw new UnsupportedOperationException("Unsupported compression algorithm: " + algorithm);
+            return ZLIB_RAW_STRATEGY; // fallback
         }
     }
 
